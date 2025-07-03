@@ -45,33 +45,13 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, challenge, forma
           </div>
 
           <h3 className="text-2xl font-bold text-white mb-2">{player.name}</h3>
-          <p className="text-green-200 mb-4">{player.position}</p>
-
-          <div className="space-y-3">
-            <div className="flex items-center justify-center space-x-2 p-3 bg-white/10 rounded-lg border border-white/20">
-              {challenge === 'batting' ? (
-                <Target className="w-5 h-5 text-blue-400" />
-              ) : (
-                <TrendingUp className="w-5 h-5 text-red-400" />
-              )}
-              <span className="text-sm text-green-200">Career {statLabel} ({format})</span>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-4xl font-bold text-white mb-1">
-                {stat.toLocaleString()}
-              </div>
-              <div className="text-sm text-green-200">{statLabel}</div>
-            </div>
-          </div>
 
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="mt-6 text-center"
           >
-            <p className="text-green-200 text-sm">Choose a multiplier slot!</p>
-            <div className="text-2xl mt-2">👇</div>
+            <p className="text-green-200 text-sm">Choose a multiplier slot! 👇</p>
           </motion.div>
         </div>
       </div>

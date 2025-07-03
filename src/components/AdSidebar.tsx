@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AdBanner } from './AdBanner';
-import { ExternalLink, TrendingUp, Users, Zap } from 'lucide-react';
+import { TrendingUp, Users, ExternalLink } from 'lucide-react';
 
 export const AdSidebar: React.FC = () => {
   return (
@@ -10,19 +9,6 @@ export const AdSidebar: React.FC = () => {
       animate={{ opacity: 1, x: 0 }}
       className="hidden lg:block w-64 space-y-6"
     >
-      {/* Primary Ad Space */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-        <h3 className="text-sm font-semibold text-white mb-3 flex items-center">
-          <Zap className="w-4 h-4 mr-2 text-yellow-400" />
-          Sponsored
-        </h3>
-        <AdBanner 
-          slot={import.meta.env.VITE_AD_UNIT_SIDEBAR || 'sidebar-1'} 
-          size="rectangle"
-          className="mx-auto"
-        />
-      </div>
-
       {/* Game Stats Widget */}
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
         <h3 className="text-sm font-semibold text-white mb-3 flex items-center">
@@ -74,16 +60,6 @@ export const AdSidebar: React.FC = () => {
             Cricket News
           </a>
         </div>
-      </div>
-
-      {/* Secondary Ad Space */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-        <h3 className="text-sm font-semibold text-white mb-3">More Games</h3>
-        <AdBanner 
-          slot={import.meta.env.VITE_AD_UNIT_SIDEBAR || 'sidebar-2'} 
-          size="rectangle"
-          className="mx-auto"
-        />
       </div>
     </motion.div>
   );
