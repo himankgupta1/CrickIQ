@@ -326,12 +326,12 @@ function App() {
                       <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition-colors">
                         <Target className="w-6 h-6" />
                       </div>
-                      <h3 className="text-lg font-bold mb-2">Batting Challenge</h3>
-                      <p className="text-blue-200 mb-3 text-sm">Score 500,000 runs with strategic player placement</p>
+                      <h3 className="text-lg font-bold mb-2">Batting Strategy Mode</h3>
+                      <p className="text-blue-200 mb-3 text-sm">Build your dream batting lineup to smash run records!</p>
                       <div className="text-xs text-blue-300">
-                        <p>• Use batting averages and career runs</p>
-                        <p>• Master the multiplier strategy</p>
-                        <p>• Build massive run totals</p>
+                        <p>• Select legendary batsmen</p>
+                        <p>• Place them wisely in the multiplier slots</p>
+                        <p>• Watch your scoreboard explode!</p>
                       </div>
                     </div>
                   </motion.div>
@@ -346,12 +346,12 @@ function App() {
                       <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition-colors">
                         <Zap className="w-6 h-6" />
                       </div>
-                      <h3 className="text-lg font-bold mb-2">Bowling Challenge</h3>
-                      <p className="text-red-200 mb-3 text-sm">Take 1,000 wickets with bowling legends</p>
+                      <h3 className="text-lg font-bold mb-2">Bowling Strategy Mode</h3>
+                      <p className="text-red-200 mb-3 text-sm">Assemble a fearsome bowling attack to crush opponents!</p>
                       <div className="text-xs text-red-300">
-                        <p>• Use bowling averages and career wickets</p>
-                        <p>• Strategic wicket-taking approach</p>
-                        <p>• Dominate with bowling skills</p>
+                        <p>• Pick iconic pacers and spinners</p>
+                        <p>• Time their deployment</p>
+                        <p>• Take down top-order giants!</p>
                       </div>
                     </div>
                   </motion.div>
@@ -385,9 +385,9 @@ function App() {
 
                 <div className="grid md:grid-cols-3 gap-4 mb-4">
                   {[
-                    { format: 'Test' as Format, color: 'from-emerald-600 to-emerald-800', description: 'Traditional cricket at its finest' },
-                    { format: 'ODI' as Format, color: 'from-blue-600 to-blue-800', description: 'Limited overs excitement' },
-                    { format: 'T20I' as Format, color: 'from-purple-600 to-purple-800', description: 'Fast-paced action' }
+                    { format: 'Test' as Format, color: 'from-emerald-600 to-emerald-800', description: "Legends\' Arena. Dig deep into cricket's elite." },
+                    { format: 'ODI' as Format, color: 'from-blue-600 to-blue-800', description: '50-50 Warfare. Balance aggression with strategy.' },
+                    { format: 'IPL' as Format, color: 'from-purple-600 to-purple-800', description: 'T20 Blitz. Big hits. Big names. Bigger stakes.'}
                   ].map(({ format, color, description }) => (
                     <motion.div
                       key={format}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trophy, Medal, Award, Filter, Calendar, Wifi, WifiOff, Loader } from 'lucide-react';
+import { X, Trophy, Medal, Award, Filter, Wifi, WifiOff, Loader } from 'lucide-react';
 
 interface ScoreEntry {
   username: string;
@@ -35,11 +35,11 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
 
   const categories = [
     { key: 'batting-Test', label: '🏏 Batting - Test' },
-    { key: 'batting-ODI', label: '🏏 Batting - ODI' },
-    { key: 'batting-T20I', label: '🏏 Batting - T20I' },
     { key: 'bowling-Test', label: '🎯 Bowling - Test' },
+    { key: 'batting-ODI', label: '🏏 Batting - ODI' },
     { key: 'bowling-ODI', label: '🎯 Bowling - ODI' },
-    { key: 'bowling-T20I', label: '🎯 Bowling - T20I' },
+    { key: 'batting-T20I', label: '🏏 Batting - IPL' },
+    { key: 'bowling-T20I', label: '🎯 Bowling - IPL' },
   ];
 
   const getRankIcon = (rank: number) => {
@@ -83,7 +83,7 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="bg-gradient-to-br from-green-900 to-emerald-900 rounded-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-hidden border border-white/20"
+          className="bg-gradient-to-br from-green-900 to-emerald-900 rounded-2xl p-6 w-full max-w-2xl max-h-screen overflow-hidden border border-white/20"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between mb-6">
@@ -97,7 +97,7 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
                   {isOnline ? (
                     <Wifi className="w-5 h-5 text-green-400" />
                   ) : (
-                    <WifiOff className="w-5 h-5 text-orange-400"/>
+                    <WifiOff className="w-5 h-5 text-orange-400" />
                   )}
                 </div>
                 <p className="text-green-200 text-sm">
@@ -137,7 +137,7 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
             </div>
           </div>
 
-          <div className="overflow-y-auto max-h-96 space-y-3">
+          <div className="space-y-3">
             {loading ? (
               <div className="text-center py-12">
                 <Loader className="w-8 h-8 text-green-400 mx-auto mb-4 animate-spin" />
@@ -156,39 +156,28 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className={`
-                    p-4 rounded-xl border backdrop-blur-sm bg-gradient-to-r
+                  className={`rounded-xl border backdrop-blur-sm bg-gradient-to-r flex items-center justify-between
                     ${getRankColor(index + 1)}
+                    ${index === 0 ? 'px-4 py-3' : index < 3 ? 'px-3 py-2' : 'px-2 py-1'}
                   `}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      {getRankIcon(index + 1)}
-                      <div>
-                        <h3 className="font-semibold text-white">{entry.username}</h3>
-                        <div className="flex items-center space-x-4 text-sm text-green-200">
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="w-3 h-3" />
-                            <span>{new Date(entry.date).toLocaleDateString()}</span>
-                          </div>
-                          {entry.streak > 1 && (
-                            <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-200">
-                              {entry.streak}x streak
-                            </span>
-                          )}
-                          {entry.gameDuration && (
-                            <span className="text-xs text-gray-300">
-                              {formatDuration(entry.gameDuration)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                  <div className="flex items-center space-x-3">
+                    {getRankIcon(index + 1)}
+                    <h3 className={`
+                      font-semibold text-white truncate
+                      ${index === 0 ? 'text-base' : index < 3 ? 'text-sm' : 'text-xs'}
+                    `}>
+                      {entry.username}
+                    </h3>
+                  </div>
+                  <div className="text-right">
+                    <div className={`font-bold text-white ${index === 0 ? 'text-xl' : index < 3 ? 'text-base' : 'text-sm'}`}>
+                      {entry.score.toLocaleString()}
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-white">
-                        {entry.score.toLocaleString()}
-                      </div>
-                      <div className="text-sm text-green-200">points</div>
+                    <div className="text-xs text-green-200">
+                      {
+                        selectedCategory.startsWith('batting')?'runs':'wickets'
+                      }
                     </div>
                   </div>
                 </motion.div>
