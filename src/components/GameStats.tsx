@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, BarChart3, TrendingUp, Award, Star } from 'lucide-react';
+import { X, BarChart3, TrendingUp, Award, Star, Target, Trophy } from 'lucide-react';
 import { PlayerStats, Achievement } from '../types/game';
 
 interface GameStatsProps {
@@ -8,13 +8,17 @@ interface GameStatsProps {
   onClose: () => void;
   stats: PlayerStats;
   achievements: Achievement[];
+  placementAccuracy?: number;
+  maxPossibleScore?: number;
 }
 
 export const GameStats: React.FC<GameStatsProps> = ({
   isOpen,
   onClose,
   stats,
-  achievements
+  achievements,
+  placementAccuracy,
+  maxPossibleScore
 }) => {
   const averageScore = stats.gamesPlayed > 0 ? Math.round(stats.totalScore / stats.gamesPlayed) : 0;
   const unlockedAchievements = achievements.filter(a => a.unlocked);
@@ -79,6 +83,34 @@ export const GameStats: React.FC<GameStatsProps> = ({
                   <div className="text-2xl font-bold text-white">{averageScore.toLocaleString()}</div>
                   <div className="text-sm text-green-200">Average Score</div>
                 </div>
+
+                {placementAccuracy !== undefined && (
+                  <div className="bg-white/10 p-4 rounded-xl border border-white/20 col-span-2 flex items-center space-x-3">
+                    <Target className="w-6 h-6 text-yellow-300" />
+                    <div>
+                      <div className="text-white font-bold">
+                        You placed {placementAccuracy} player{placementAccuracy === 1 ? '' : 's'} in the best position!
+                      </div>
+                      <div className="text-green-200 text-sm">
+                        Strategic accuracy in last round
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {maxPossibleScore !== undefined && (
+                  <div className="bg-white/10 p-4 rounded-xl border border-white/20 col-span-2 flex items-center space-x-3">
+                    <Trophy className="w-6 h-6 text-orange-400" />
+                    <div>
+                      <div className="text-white font-bold">
+                        Maximum possible score for that round was {maxPossibleScore.toLocaleString()}
+                      </div>
+                      <div className="text-green-200 text-sm">
+                        Did you get close?
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -98,8 +130,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
                       p-3 rounded-lg border flex items-center space-x-3
                       ${achievement.unlocked
                         ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-400/30'
-                        : 'bg-white/5 border-white/10 opacity-60'
-                      }
+                        : 'bg-white/5 border-white/10 opacity-60'}
                     `}
                   >
                     <div className="text-2xl">{achievement.icon}</div>

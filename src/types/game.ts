@@ -1,5 +1,5 @@
 export type Challenge = 'batting' | 'bowling';
-export type Format = 'Test' | 'ODI' | 'T20I';
+export type Format = 'Test' | 'ODI' | 'IPL';
 export type GameState = 'menu' | 'challenge-select' | 'format-select' | 'playing' | 'results';
 
 export interface Player {
@@ -8,12 +8,12 @@ export interface Player {
   batting: {
     Test: number;
     ODI: number;
-    T20I: number;
+    IPL: number;
   };
   bowling: {
     Test: number;
     ODI: number;
-    T20I: number;
+    IPL: number;
   };
   image?: string;
   position: 'Batsman' | 'Bowler' | 'All-rounder' | 'Wicket-keeper';
@@ -29,8 +29,7 @@ export interface ScoreEntry {
   username: string;
   score: number;
   date: string;
-  streak: number;
-  combo: number;
+  gameDuration: number;
 }
 
 export interface PlayerStats {
@@ -38,6 +37,13 @@ export interface PlayerStats {
   totalScore: number;
   bestScore: number;
   achievements: string[];
+  modeStats: {
+    Test: { gamesPlayed: number };
+    ODI: { gamesPlayed: number };
+    IPL: { gamesPlayed: number };
+    batting: { gamesPlayed: number };
+    bowling: { gamesPlayed: number };
+  };
 }
 
 export interface Achievement {

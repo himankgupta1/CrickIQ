@@ -61,7 +61,7 @@ export class LeaderboardService {
 
       // Limit each category to top 20
       Object.keys(grouped).forEach(key => {
-        grouped[key] = grouped[key].slice(0, 20);
+        grouped[key] = grouped[key].slice(0, 5);
       });
 
       return { success: true, data: grouped };
